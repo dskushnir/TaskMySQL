@@ -40,6 +40,10 @@
 
  command : gradlew test
 
+ It is recommended to run each test class separately.
+ This will help to avoid failed test results.
+
+
    You could use Plagine Gradle too.
 
 
