@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="orderBaseRepository" class="com.kushnir.taskMySQL.order.repository.OrderRepository">
+    </bean>
+
+    <alias name="orderBaseRepository" alias="orderBaseRepository-alias"/>
+
+    <bean id="orderBaseService" class="com.kushnir.taskMySQL.order.service.OrderService">
+        <constructor-arg name="orderBaseRepository" ref="orderBaseRepository-alias"/>
+    </bean>
+
+    <alias name="orderBaseService" alias="orderBaseService-alias"/>
+
+    <bean id="orderEntryBaseRepository" class="com.kushnir.taskMySQL.orderEntry.repository.OrderEntryRepository">
+    </bean>
+
+    <alias name="orderEntryBaseRepository" alias="orderEntryBaseRepository-alias"/>
+
+    <bean id="orderEntryBaseService" class="com.kushnir.taskMySQL.orderEntry.service.OrderEntryService">
+        <constructor-arg name="orderEntryBaseRepository" ref="orderEntryBaseRepository-alias"/>
+        <constructor-arg name="productBaseService" ref="productBaseService-alias"/>
+        <constructor-arg name="orderBaseService" ref="orderBaseService-alias"/>
+
+    </bean>
+    <bean id="productBaseRepository" class="com.kushnir.taskMySQL.product.repository.ProductRepository">
+    </bean>
+
+    <alias name="productBaseRepository" alias="productBaseRepository-alias"/>
+
+    <bean id="productBaseService" class="com.kushnir.taskMySQL.product.service.ProductService">
+        <constructor-arg name="productBaseRepository" ref="productBaseRepository-alias"/>
+    </bean>
+
+    <alias name="productBaseService" alias="productBaseService-alias"/>
+
+</beans>

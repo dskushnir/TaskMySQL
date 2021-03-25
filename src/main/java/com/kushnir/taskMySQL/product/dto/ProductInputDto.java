@@ -1,6 +1,6 @@
 package com.kushnir.taskMySQL.product.dto;
 
-import com.kushnir.taskMySQL.product.ProductStatusEnum;
+import com.kushnir.taskMySQL.product.entity.ProductStatusEnum;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

@@ -1,6 +1,9 @@
 package com.kushnir.taskMySQL.product;
 
 import com.kushnir.taskMySQL.TestRunner;
+import com.kushnir.taskMySQL.product.entity.Product;
+import com.kushnir.taskMySQL.product.entity.ProductStatusEnum;
+import com.kushnir.taskMySQL.product.repository.ProductRepository;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.junit.After;

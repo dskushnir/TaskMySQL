@@ -1,13 +1,16 @@
-package com.kushnir.taskMySQL.product;
+package com.kushnir.taskMySQL.product.controller;
 
+import com.kushnir.taskMySQL.product.exception.NoSuchProductException;
+import com.kushnir.taskMySQL.product.exception.ProductNotFoundException;
 import com.kushnir.taskMySQL.product.dto.*;
+import com.kushnir.taskMySQL.product.service.ProductBaseService;
 import com.kushnir.taskMySQL.sequrity.TaskMysqlUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -16,17 +19,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+
 @Slf4j
 public class ProductController {
-    private final ProductService productService;
+    private final ProductBaseService productBaseService;
     private final ProductDtoConverter productDtoConverter;
     private final ProductModelConverter productModelConverter;
     private final UriComponentsBuilder uriBuilder;
     private Clock clock;
 
-    public ProductController(ProductService productService, ProductDtoConverter productDtoConverter, ProductModelConverter productModelConverter, Clock clock) {
-        this.productService = productService;
+    public ProductController(ProductBaseService productBaseService, ProductDtoConverter productDtoConverter, ProductModelConverter productModelConverter, Clock clock) {
+        this.productBaseService = productBaseService;
         this.productDtoConverter = productDtoConverter;
         this.productModelConverter = productModelConverter;
         uriBuilder = UriComponentsBuilder.newInstance()
@@ -39,7 +42,7 @@ public class ProductController {
 
     @GetMapping("/productsAll")
     public List<ProductOutputDto> findAllProducts() {
-        var products = productService.findAll();
+        var products = productBaseService.findAll();
         if (products.size() == 0) {
             throw new ProductNotFoundException();
         }
@@ -50,7 +53,7 @@ public class ProductController {
 
     @GetMapping("/products/quantity")
     public List<ProductQuantityOutputDto> quantityOrderedProduct() {
-        var orderedProducts = productService.quantityOrderedProduct();
+        var orderedProducts = productBaseService.quantityOrderedProduct();
         if (orderedProducts.size() == 0) {
             throw new ProductNotFoundException();
         }
@@ -60,16 +63,16 @@ public class ProductController {
 
     @PostMapping("/productsCreate")
     public ResponseEntity<Object> createProduct(@RequestBody ProductInputDto productInputDto) {
-        var created = productService.createProduct(productDtoConverter.toModel(productInputDto, LocalDateTime.now(clock)));
+        var created = productBaseService.createProduct(productDtoConverter.toModel(productInputDto, LocalDateTime.now(clock)));
         return ResponseEntity.created(uriBuilder.build(created.getId())).build();
     }
 
     @DeleteMapping("/products/{id}")
     @PreAuthorize("hasAuthority('delete:product')")
     public ResponseEntity<Object> deleteProduct(@PathVariable Integer id, @AuthenticationPrincipal TaskMysqlUser userDetails) {
-        var product = productService.findById(id);
+        var product = productBaseService.findById(id);
         if (product.isPresent()) {
-            productService.delete(id);
+            productBaseService.delete(id);
             log.info("Current user details: " + userDetails);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
@@ -81,11 +84,11 @@ public class ProductController {
     @DeleteMapping("/products")
     @PreAuthorize("hasAuthority('deleteAll:products')")
     public ResponseEntity<Object> deleteAllProducts() {
-        var products = productService.findAll();
+        var products = productBaseService.findAll();
         if (products.size() == 0) {
             throw new ProductNotFoundException();
         }
-        productService.deleteAll();
+        productBaseService.deleteAll();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

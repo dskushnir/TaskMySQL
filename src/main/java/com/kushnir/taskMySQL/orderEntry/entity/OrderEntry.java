@@ -1,7 +1,7 @@
-package com.kushnir.taskMySQL.orderEntry;
+package com.kushnir.taskMySQL.orderEntry.entity;
 
-import com.kushnir.taskMySQL.order.Order;
-import com.kushnir.taskMySQL.product.Product;
+import com.kushnir.taskMySQL.order.entity.Order;
+import com.kushnir.taskMySQL.product.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

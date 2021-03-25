@@ -1,4 +1,4 @@
-package com.kushnir.taskMySQL.product;
+package com.kushnir.taskMySQL.product.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

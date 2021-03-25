@@ -1,11 +1,12 @@
 package com.kushnir.taskMySQL.order;
 
 import com.kushnir.taskMySQL.TestRunner;
-import com.kushnir.taskMySQL.orderEntry.OrderEntryService;
+import com.kushnir.taskMySQL.order.repository.OrderRepository;
 
-import com.kushnir.taskMySQL.product.Product;
-import com.kushnir.taskMySQL.product.ProductRepository;
-import com.kushnir.taskMySQL.product.ProductStatusEnum;
+import com.kushnir.taskMySQL.order.service.OrderService;
+import com.kushnir.taskMySQL.product.entity.Product;
+import com.kushnir.taskMySQL.product.repository.ProductRepository;
+import com.kushnir.taskMySQL.product.entity.ProductStatusEnum;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.junit.Test;
