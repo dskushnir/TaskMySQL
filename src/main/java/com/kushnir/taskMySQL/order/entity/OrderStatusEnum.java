@@ -1,4 +1,4 @@
-package com.kushnir.taskMySQL.order;
+package com.kushnir.taskMySQL.order.entity;
 
 public enum OrderStatusEnum {
     NEW,

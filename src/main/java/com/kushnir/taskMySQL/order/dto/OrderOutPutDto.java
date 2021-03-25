@@ -1,6 +1,6 @@
 package com.kushnir.taskMySQL.order.dto;
 
-import com.kushnir.taskMySQL.order.OrderStatusEnum;
+import com.kushnir.taskMySQL.order.entity.OrderStatusEnum;
 import lombok.Data;
 
 @Data

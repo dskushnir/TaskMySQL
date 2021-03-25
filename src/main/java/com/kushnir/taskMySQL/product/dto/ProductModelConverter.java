@@ -1,6 +1,6 @@
 package com.kushnir.taskMySQL.product.dto;
 
-import com.kushnir.taskMySQL.product.Product;
+import com.kushnir.taskMySQL.product.entity.Product;
 import org.mapstruct.Mapper;
 
 @Mapper

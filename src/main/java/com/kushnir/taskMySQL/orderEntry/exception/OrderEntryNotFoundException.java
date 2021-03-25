@@ -1,4 +1,4 @@
-package com.kushnir.taskMySQL.orderEntry;
+package com.kushnir.taskMySQL.orderEntry.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,4 +1,4 @@
-package com.kushnir.taskMySQL.product;
+package com.kushnir.taskMySQL.product.entity;
 
 public enum ProductStatusEnum {
     OUT_OF_STOCK,
